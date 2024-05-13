@@ -1,0 +1,87 @@
+
+<div class="mat-card" style="display:flex; flex-direction: row;" >
+    <mat-card class="mat-card count-card bg-warning" >
+        <mat-card-title>Num Of Programs</mat-card-title>
+        <mat-card-content>{{totalPrograms}}</mat-card-content>
+    </mat-card>
+    <mat-card class="mat-card count-card bg-success" >
+        <mat-card-title>Num Of Programs with more than 10 Batches</mat-card-title>
+        <mat-card-content>{{programMaxBatches}}</mat-card-content>
+    </mat-card>
+    
+    <mat-card class="mat-card count-card bg-info" >
+        <mat-card-title>Num Of Active Programs</mat-card-title>
+        <mat-card-content>15</mat-card-content>
+    </mat-card>
+    <mat-card class="mat-card count-card bg-primary" >
+        <mat-card-title>Num Of Inactive Programs</mat-card-title>
+        <mat-card-content>10</mat-card-content>
+    </mat-card>
+
+</div>
+
+<mat-card class="mat-card">
+    <mat-card-header>
+        <mat-card-title>Listing All Programs</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource" matSort >
+            <ng-container matColumnDef="select" >
+                <th mat-header-cell *matHeaderCellDef ></th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox></mat-checkbox>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>Description</th>
+                <td mat-cell *matCellDef="let element">{{element.description}}</td>
+            </ng-container>
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef>Active</th>
+                <td mat-cell *matCellDef="let element">{{element.active}}</td>
+            </ng-container>
+            <ng-container matColumnDef="noOfBatches">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >No Of Batches</th>
+                <td mat-cell *matCellDef="let element">{{element.noOfBatches}}</td>
+            </ng-container>
+            <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef>Created Date</th>
+                <td mat-cell *matCellDef="let element">{{element.createdDate}}</td>
+            </ng-container>
+            <ng-container matColumnDef="updatedDate">
+                <th mat-header-cell *matHeaderCellDef>Updated Date</th>
+                <td mat-cell *matCellDef="let element">{{element.updatedDate}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <a [routerLink]="['view', element.id]">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                    </a> 
+                    <a [routerLink]="['edit', element.id]">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+                    </a> 
+                    <a [routerLink]="['delete', element.id]">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+                    </a> 
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons="" >
+        </mat-paginator>
+        
+    </mat-card-content>
+    
+</mat-card>

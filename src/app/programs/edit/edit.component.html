@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Edit Program</mat-card-title>
+    </mat-card-header>
+    <mat-card-content></mat-card-content>
+        <form [formGroup]="editProgramForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <mat-form-field class="half-width">
+                    <label>Program Name</label>
+                    <input matInput placeholder="Program Name" formControlName="name">
+                    <mat-error *ngIf="editProgramForm.get('name')?.hasError('required')">Name is required</mat-error>
+                    <mat-error *ngIf="editProgramForm.get('name')?.hasError('minlength')">Name min length is 3</mat-error>
+                    <mat-error *ngIf="editProgramForm.get('name')?.hasError('maxlength')">Name max length is 20</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="half-width">
+                    <label>Description</label>
+                    <input matInput placeholder="Program Description" formControlName="description">
+                    <mat-error *ngIf="editProgramForm.get('description')?.hasError('required')">Description is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="half-width">
+                    <label>noOfBatches</label>
+                    <mat-select aria-placeholder="No of Batches" formControlName="noOfBatches">
+                        <mat-option value="5">5</mat-option>
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="15">15</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="!editProgramForm.valid">Edit Program</button>
+        </form>
+
+</mat-card>

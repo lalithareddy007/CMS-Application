@@ -1,0 +1,69 @@
+
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Add New Program</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form #programForm="ngForm" (ngSubmit)="saveProgram()">
+            <div class="form-group">
+                <mat-form-field class="half-width">
+                    <label>Name</label>
+                    <input matInput placeholder="Enter Program Name" name="name" [(ngModel)]="newProgram.name" required minlength="3" maxlength="20">
+                    <mat-error *ngIf="programForm.controls['name']?.touched && programForm.controls['name']?.hasError('required')">Name is required</mat-error>
+                    <mat-error *ngIf="programForm.controls['name']?.touched && programForm.controls['name']?.hasError('minlength')">Name must have atleast 3 character long</mat-error>
+                    <mat-error *ngIf="programForm.controls['name']?.touched && programForm.controls['name']?.hasError('maxlength')">Name cann't be more than 20 characters long</mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width">
+                    <label>Description</label>
+                    <textarea matInput required minlength="3" placeholder="Enter Program Description" name="description" [(ngModel)]="newProgram.description"></textarea>
+                    <mat-error *ngIf="programForm.controls['description']?.touched && programForm.controls['description']?.hasError('required')">Program description is required</mat-error>
+                </mat-form-field>
+            </div>
+                <!-- <mat-form-field>
+                    <label>Description</label>
+                    <input matInput placeholder="Enter Program Description" name="description" [(ngModel)]="newProgram.description" required minlength="3" maxlength="20">
+                    <mat-error *ngIf="programForm.controls['description']?.touched && programForm.controls['description']?.hasError('required')">Program description is required</mat-error>
+                    <mat-error *ngIf="programForm.controls['description']?.touched && programForm.controls['description']?.hasError('minlength')">Description must have atleast 3 character long</mat-error>
+                    <mat-error *ngIf="programForm.controls['description']?.touched && programForm.controls['description']?.hasError('maxlength')">Description cann't be more than 20 characters long</mat-error>
+                </mat-form-field> -->
+            
+            <div class="form-group">
+                <mat-checkbox name="active" [(ngModel)]="newProgram.active" required >Active</mat-checkbox>
+                <mat-error *ngId="programForm.controls['action']?.touched && programForm.controls['action']?.hasError('required')">Action must be selected</mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field class="full-width">
+                    <label>No Of Batches</label>
+                    <mat-select placeholder="Select Recommended No of Batches" name="noOfBatches" [(ngModel)]="newProgram.noOfBatches">
+                        <mat-option value="5">5</mat-option>
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="15">15</mat-option>
+
+                    </mat-select>
+                </mat-form-field>     
+            </div>
+            <div class="form-group">
+                <mat-form-field class="half-width">
+                    <mat-label>Choose Creation Date</mat-label>
+                    <input matInput required  [matDatepicker]="createdDatePicker" name="createdDate" [(ngModel)]="newProgram.createdDate"  minlength="3" placeholder="Select Date">
+                    <mat-datepicker-toggle matSuffix [for]="createdDatePicker" ></mat-datepicker-toggle>
+                    <mat-datepicker #createdDatePicker ></mat-datepicker>
+                    <mat-error *ngIf="programForm.controls['createdDate']?.touched && programForm.controls['createdDate']?.invalid">Select Created Date</mat-error>
+                </mat-form-field>
+           
+                <mat-form-field class="half-width">
+                    <mat-label>Choose Updation Date</mat-label>
+                    <input matInput required  [matDatepicker]="updatedDatePicker" name="updatedDate" [(ngModel)]="newProgram.updatedDate"  minlength="3" placeholder="Select Date">
+                    <mat-datepicker-toggle matSuffix [for]="updatedDatePicker" ></mat-datepicker-toggle>
+                    <mat-datepicker #updatedDatePicker ></mat-datepicker>
+                    <mat-error *ngIf="programForm.controls['updatedDate']?.touched && programForm.controls['updatedDate']?.invalid">Select Updation Date</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <button mat-raised-button color="primary" [disabled]="!programForm.valid">Add New Program</button>
+
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
